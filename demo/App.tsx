@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import useArrayRerender from "../demo/useArrayRerender";
 
 function App() {
+
+  useArrayRerender()
 
   return (<div>aaaa</div>)
 }
