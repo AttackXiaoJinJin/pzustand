@@ -13,8 +13,7 @@
 * const setA=useStore((state)=>state.setA)
 * */
 
-import { useSyncExternalStore } from 'react';
-
+import {useSyncExternalStoreWithSelector} from 'use-sync-external-store/with-selector'
 
 // createStore:(set,get,storeApi)=>{ return { 开发者写的state } }
 // 也就是执行createStore()返回的才是开发者写的state
@@ -68,11 +67,19 @@ const create=(createStore)=>{
   // const a=useStore((state)=>state.a)
   // 执行useStore的时候会传入一个func（selector），func参数是state
   const useStore=(selector,equalFunc=Object.is)=>{
-
-
-    return selector(state)
+    /* 用于与外部数据源同步状态，保证组件在外部数据变化时能及时响应，也就是防止react18并发模式的撕裂 */
+    const stateSlice=useSyncExternalStoreWithSelector(
+      storeApi.subscribe,
+      storeApi.getState,
+      undefined,
+      /* 注意这里，zustand是把整个state都抛给了外部 */
+      // selector=(state)=>state.a
+      (snapShot)=>selector(snapShot),
+      equalFunc
+    )
+    return stateSlice
   }
-
+  return useStore
 }
 
 export default create
