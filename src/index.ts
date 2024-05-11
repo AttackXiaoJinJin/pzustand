@@ -11,7 +11,6 @@ const pcreate=<T>(createStore:StateCreator<T>)=>{
     )
 
     const puseStore=<U>(selector:(state: T) => U)=>{
-
         /* 默认使用浅比较 */
         return useStore(selector,shallow)
     }

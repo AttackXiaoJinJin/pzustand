@@ -17,10 +17,20 @@ const useModeStore=create<IMode>()(devtools((set, get, storeApi)=>{
             set({
                 selected:!get().selected
             },false,'修改了select')
+        },
+        onGetSelectDisable:()=>{
+
         }
     }
 },{
     name:'useModeStore'
 }))
 
-export {useModeStore}
+const getSelectDisable = (state) => {
+    const {selected,disabled}=state
+    const str=`selected:${selected},disabled:${disabled}`
+    return str
+}
+
+
+export {useModeStore,getSelectDisable}
