@@ -1,24 +1,22 @@
 import {useWhyDidYouUpdate,useTimeout} from 'ahooks'
 
-import {useModeStore,getSelectDisable} from "./modeStore";
+import {useModeStore,onCompute} from "./modeStore";
+import {useEffect, useMemo} from "react";
 
 
 function useComputation() {
-    const str=useModeStore(getSelectDisable)
-    const onSetSelect=(useModeStore((state)=>state.onSetSelect))
+    const res=useModeStore(onCompute)
+
+    const onChangeCompute1=(useModeStore((state)=>state.onChangeCompute1))
+
+    // const onSetSelect=(useModeStore((state)=>state.onSetSelect))
 
     useTimeout(()=>{
-        onSetSelect()
+        onChangeCompute1()
     },3000)
 
-    console.log(str,'str14')
 
-    useWhyDidYouUpdate('测试派生状态',{
-        str
-    })
-
-
-    return str
+    return res
 }
 
 export default useComputation
