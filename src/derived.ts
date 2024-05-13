@@ -15,14 +15,13 @@
 // })
 
 // 思路就是使用derived加上flag，然后使用cache缓存下计算的值，然后再将state下定义的derived值替换成cacheValue
-function derived<T,R>(computeFunc:(state:T)=>R) {
+// function derived<T,U>(computeFunc:(state:T)=>U,memoize=false):{computeFunc:(state:T)=>U;derived:boolean;memoize?:boolean} {
+function derived<T,U>(computeFunc:(state:T)=>U,memoize=false){
     return {
         computeFunc,
-        derived:true
+        derived:true,
+        memoize
     }
 }
-// Map性能更好，但object更直观
-const derivdCache={}
 
-export {derivdCache}
 export default derived

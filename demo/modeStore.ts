@@ -8,8 +8,8 @@ interface IMode {
     disabled:boolean;
     onSetSelect:()=>void;
     // compute
-    compute1:1,
-    compute2:2,
+    compute1:number;
+    compute2:number;
     onChangeCompute1:()=>void;
 }
 
