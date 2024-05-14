@@ -11,12 +11,12 @@ interface IMode {
     compute1:number;
     compute2:number;
     compute3:number;
+    compute4:number;
     onChangeCompute1:()=>void;
 
 }
 
 const useModePerformanceStore=pcreate<IMode>((set, get, storeApi)=>{
-    console.log('useModePerformanceStore','useModePerformanceStore19')
     return {
         mode:{a:'chen'},
         selected:true,
@@ -36,7 +36,9 @@ const useModePerformanceStore=pcreate<IMode>((set, get, storeApi)=>{
         },
         /* 派生值直接定义在store中，且当依赖项变化时立即更新 */
         compute3:derived((state:IMode)=>state.compute1+state.compute2,true),
-
+        compute4:derived((state:IMode)=>{
+            return state.compute2+state.compute2
+        },true)
     }
 })
 

@@ -10,7 +10,9 @@ interface IMode {
     // compute
     compute1:number;
     compute2:number;
+    compute3:number;
     onChangeCompute1:()=>void;
+    onChangeCompute3:()=>void;
 }
 
 const useModeStore=create<IMode>()(devtools((set, get, storeApi)=>{
@@ -26,9 +28,15 @@ const useModeStore=create<IMode>()(devtools((set, get, storeApi)=>{
         },
         compute1:1,
         compute2:2,
+        compute3:3,
         onChangeCompute1:()=>{
             set({
                 compute1:5
+            })
+        },
+        onChangeCompute3:()=>{
+            set({
+                compute3:6
             })
         }
     }
